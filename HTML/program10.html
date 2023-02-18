@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image</title>
+    <style>
+        .row {
+            width: 100%;
+            height: 100%;
+        }
+
+        .content {
+            box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+            margin: 4em;
+            height: calc(100% - 8em);
+        }
+
+        img {
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 50%;
+        }
+
+        #heading1,
+        #heading2 {
+            text-align: center;
+            display: block;
+        }
+
+        #heading2 {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="content" id="content">
+            <img src="/assets/Desktop-hd-wallpaper-nature-1080p.jpg" id="image"><br><br>
+            <div class="data" id="data" onmouseleave="responsMouseout()" onmouseover="responsMouseover()">
+                <h1 id="heading1">Hover mouse here.....</h1>
+                <h1 id="heading2" style="display: none;">hi hallo world.....</h1>
+            </div>
+        </div>
+    </div>
+    <script>
+        const content = document.getElementById("data")
+        const image = document.getElementById("image")
+        const heading1 = document.getElementById("heading1")
+        const heading2 = document.getElementById("heading2")
+
+        function responsMouseover() {
+            heading1.style.display = 'none';
+            heading2.style.display = 'block';
+            image.src = "/assets/2.jpg";
+        }
+
+        function responsMouseout() {
+            heading1.style.display = 'block';
+            heading2.style.display = 'none';
+            image.src = "/assets/Desktop-hd-wallpaper-nature-1080p.jpg";
+        }
+
+    
+
+    </script>
+</body>
+
+</html>
