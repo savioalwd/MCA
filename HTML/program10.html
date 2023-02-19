@@ -38,7 +38,7 @@
     <div class="row">
         <div class="content" id="content">
             <img src="/assets/Desktop-hd-wallpaper-nature-1080p.jpg" id="image"><br><br>
-            <div class="data" id="data" onmouseleave="responsMouseout()" onmouseover="responsMouseover()">
+            <div class="data" id="data" >
                 <h1 id="heading1">Hover mouse here.....</h1>
                 <h1 id="heading2" style="display: none;">hi hallo world.....</h1>
             </div>
@@ -50,6 +50,9 @@
         const heading1 = document.getElementById("heading1")
         const heading2 = document.getElementById("heading2")
 
+        content.addEventListener('mouseover',responsMouseover);
+        content.addEventListener('mouseout',responsMouseout);
+        
         function responsMouseover() {
             heading1.style.display = 'none';
             heading2.style.display = 'block';
