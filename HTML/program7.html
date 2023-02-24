@@ -1,125 +1,203 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">Program executed and output obtained successfully.
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calender</title>
-    <style>
-        s.election {
-            text-align: center;
-            margin-bottom: 2em;
-            background-color: rgb(174, 179, 181);
-            width: 100%;
-        }
-
-        #year_get,
-        #month_get {
-            padding: 5px;
-            width: 75%;
-        }
-
-        input {
-            padding:
-                5px;
-        }
-
-        t.abselection {
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-        }
-
-        table {
-            padding: 5px;
-        }
-
-        tr {}
-
-        .selrow {
-            border: none;
-        }
-
-        td,
-        th {
-            padding: 10px;
-            border: 1px solid black;
-        }
-
-        .selcol {
-            padding: 0px;
-            border: none;
-            text-align: center;
-        }
-
-        #calender {
-            border-collapse: collapse;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #resetbtn {
-            background-color: red;
-            border: none;
-            color: white;
-        }
-
-        #subtn {
-            background-color: green;
-            border: none;
-            color: white;
-        }
-    </style>
+    <title>Calendar</title>
+    <author>XAVIYO GEORGE</author>
 </head>
+<style>
+    body {
+        padding: 10px 10px;
+    }
+
+    .calendar {
+        display: flex;
+        flex-direction: row;
+        height: 150;
+        background-color: gainsboro;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .calendar ul {
+        list-style-type: none;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        width: 800px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+
+    .calendar ul li {
+        cursor: pointer;
+        color: white;
+
+    }
+
+    .calendar ul li div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px;
+        row-gap: 8px;
+    }
+
+
+    .calendar ul li div input {
+        height: 25px;
+        border: none;
+        width: 250px;
+        padding: 5px 16px;
+        color: black;
+    }
+
+    .inp_warning {
+        background-color: red;
+        color: white;
+    }
+
+    .calendar ul li div button {
+        padding: 10px 60px;
+        width: 100%;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .calendar ul li div .gree {
+        background-color: green;
+    }
+
+    .calendar ul li div .warning {
+        background-color: red;
+    }
+
+    .calendar__body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .calendar__body table {
+        width: 100%;
+    }
+
+    .calendar__body table tr th {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px 15px;
+        background-color: grey;
+    }
+
+    .calendar__body table tr td {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 18px;
+        font-weight: 800;
+        padding: 10px 15px;
+        background-color: grey;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .calendar__body table tr td:hover {
+        background-color: #1abc9c;
+        font-size: 20px;
+    }
+</style>
+
 
 <body>
-    <div class="selection">
-        <table class="tabselection" cellspacing="10">
-            <tbody>
-                <tr class="selrow">
-                    <td class="selcol"><input id="year_get" type="number" placeholder="year">
-                    </td>
-                    <td class="selcol"><input id="month_get" type="number" placeholder="month"> </td>
-                    </tr<tr class="selrow">
-                    <td colspan="2" class="selcol"><input onclick="generate()" type="button" id="subtn"
-                            value="Generate Calender"> </td>
-                </tr>
-                <tr class="selrow">
-                    <td colspan="2" class="selcol"><input type="reset" value="reset" id="resetbtn"
-                            onclick="location.reload();"> </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="calendar">
+        <ul>
+            <li>
+                <div>
+                    <input type="text" value="2022" id="year_inp" placeholder="Enter year">
+                    <input type="text" value="2" id="month_inp" placeholder="Enter Month">
+                    <button class="gree" onclick="generate()">Generate</button>
+                    <button class="warning">Reset</button>
+                </div>
+            </li>
+        </ul>
     </div>
-    <div id="content"> </div>
+    <div class="calendar__body" id="calendar__body">
+
+    </div>
 </body>
 <script>
+
+    generate();
+    document.getElementById("month_inp").addEventListener("focusout", () => {
+        var month = document.getElementById("month_inp").value;
+        var month_elm = document.getElementById("month_inp");
+
+        if (month <= 0 || month > 12) {
+            month_elm.classList.add("inp_warning");
+
+        } else {
+            month_elm.classList.remove("inp_warning")
+        }
+    });
+
+    document.getElementById("year_inp").addEventListener("focusout", () => {
+        var year = document.getElementById("year_inp").value;
+        var year_elm = document.getElementById("year_inp");
+
+        if (year <= 999 || year > 10000 || year == "") {
+            year_elm.classList.add("inp_warning");
+
+        } else {
+            year_elm.classList.remove("inp_warning")
+        }
+    });
     function generate() {
-        var init_content = "<table BORDER=1 id='calender'><tr><th>SUN</th><th> MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr ><tr>";
-        var year_get = document.getElementById("year_get").value;
-        var month_get = document.getElementById("month_get").value;
-        month_get -= 1;
-        var date = new Date(year_get, month_get);
-        var day = date.getDay();
-        for (var i = 0; i < day; i++) {
+
+        var year = document.getElementById("year_inp").value // geting year input value
+        var month = parseInt(document.getElementById("month_inp").value);  // geting month input value
+        var calendar__body = document.getElementById("calendar__body");  // geting target element 
+        calendar__body.replaceChildren();
+
+        init_content = "<table BORDER=1 ><tr><th>SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr><tr>";
+        const date = new Date(year, --month); // creating the date object using the user input year and month
+
+        day = date.getDay(); //making previous date columns nill
+        for (i = 0; i < day; i++) {
             init_content += "<td></td>";
         }
-        while (date.getMonth() == month_get) {
+
+        while (month == date.getMonth()) { // showing the orginal dates btw [1-32]
             init_content += "<td>" + date.getDate() + "</td>";
-            if (date.getDay() % 7 == 6) {
+            if (date.getDay() % 7 == 6) { // if the date is saturday , current row closed and new row generated
                 init_content += "</tr><tr>";
             }
-            date.setDate(date.getDate() + 1);
+            date.setDate(date.getDate() + 1) // incrementing current day by 1 : suppose if date object is 12/2/2023 becomes 12/03/2023
         }
+
+        // unnesseserry code
         while (date.getDay() % 7 != 6 && date.getDay() % 7 != 0) {
             init_content += "<td></td>";
-            date.setDate(date.getDate() + 1);
+            date.setDate(date.getDate() + 1) // incrementing current day by 1 : suppose if date object is 12/2/2023 becomes 12/03/2023
         }
         if (date.getDay() % 7 > 0) {
             init_content += "<td></td></tr>";
         }
-        init_content += "</table>"
-        document.getElementById("content").innerHTML = init_content;
+
+
+
+        init_content += "</table>"; //closing the table tag
+        calendar__body.innerHTML = init_content; // injecting the table to the target div
     }
+
 </script>
 
 </html>
